@@ -23,21 +23,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>client.c</name>
-			<type>1</type>
-			<location>/home/dushn/diplomski /making_chat_great_again/client.c</location>
-		</link>
-		<link>
-			<name>functions.c</name>
-			<type>1</type>
-			<location>/home/dushn/diplomski /making_chat_great_again/functions.c</location>
-		</link>
-		<link>
-			<name>functions.h</name>
-			<type>1</type>
-			<location>/home/dushn/diplomski /making_chat_great_again/shot/functions.h</location>
-		</link>
-	</linkedResources>
 </projectDescription>

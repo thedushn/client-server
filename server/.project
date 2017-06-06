@@ -23,11 +23,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>server2.c</name>
-			<type>1</type>
-			<location>/home/dushn/diplomski /making_chat_great_again/shot/server2.c</location>
-		</link>
-	</linkedResources>
 </projectDescription>
