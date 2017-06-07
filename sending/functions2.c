@@ -205,7 +205,7 @@ void  *send_some_files(void * socket){
 	if(nread >0){
 
 	write(sockfd,buffer_file,nread);
-		printf("Sta se upisuje na socket : %d\n",buffer_file);
+
 	}
 	if(nread < PACKET_SIZE){
 

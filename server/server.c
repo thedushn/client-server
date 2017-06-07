@@ -13,6 +13,9 @@ treba ubaciti condtion variable a nece mamu mu  njegovu
 bio je ubacen cond var i radilo je samo sto je ispisivalo jos uvek conslose type shit
 sada ni to nece chat2 salje sve treba izbaciti nesto iz receiving da bi to radilo kako treba bufer2
 
+
+slanje paketa radi samo sto pokupi ime file i upise ga i skupi jos nekih praznih karatketera
+
 */
 #include"stdio.h"
 #include"stdlib.h"
@@ -64,9 +67,9 @@ void *receiving(void *socket){
 		printf("Error sending data!\n\t-%s", buffer);
 		//printf("slanje broja paketa nije uspelo\n");
 		}
-	//	printf("sta salje client %s\n", buffer2);
+
 	printf("sta salje client %s\n", buffer);//ovde primi da su file iste extensions
-	//sada u ovom receive treba da primi file kako treba da sse zove
+	//sada u ovom receive treba da primi file kako treba da se zove
 	ret =recvfrom(sockfd,buffer2,BUF_SIZE,0,NULL,NULL);
 			if(ret<0){
 			printf("Error sending data!\n\t-%s", buffer2);
@@ -75,13 +78,13 @@ void *receiving(void *socket){
 	//num_packets = atoi(buffer);
 	//printf("broj packeta %d \n",num_packets);
 	filefd = fopen(buffer,"w+");
-
+	printf("file opened %s",buffer);
 			if (filefd == -1) {
            	 		perror("open");
             			exit(EXIT_FAILURE);
         		}
 		while((dataReceived = read(sockfd,buffer_file,1024))	> 0){
-			printf("data %s",buffer_file);
+			//printf("data %s",buffer_file);
 			if(strcmp(buffer_file,end)==0){
 				fclose(filefd);
 				printf("zatvorili smo file");
