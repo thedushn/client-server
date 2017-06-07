@@ -68,13 +68,13 @@ void *receiving(void *socket){
 		//printf("slanje broja paketa nije uspelo\n");
 		}
 
-	printf("sta salje client %s\n", buffer);//ovde primi da su file iste extensions
+	printf("sta salje client %s\n", buffer);
 	//sada u ovom receive treba da primi file kako treba da se zove
 	ret =recvfrom(sockfd,buffer2,BUF_SIZE,0,NULL,NULL);
 			if(ret<0){
 			printf("Error sending data!\n\t-%s", buffer2);
 			}
-			printf("sta salje client %s\n", buffer2);
+			printf("sta salje client %s\n", buffer2);//ovde primi da su file iste extensions
 	//num_packets = atoi(buffer);
 	//printf("broj packeta %d \n",num_packets);
 	filefd = fopen(buffer,"w+");

@@ -107,9 +107,9 @@ void  *send_some_files(void * socket){
 	printf("buffer_test %s\n",buffer_test);
 	//proveravamo da li file postoji
 	filefd= fopen(buffer_test,"r");
-	  fgets(test_buffer, 1000, filefd);
-
-	  printf("\n%s\n",test_buffer);
+	 //ispis prve linije u file
+	fgets(test_buffer, 1000, filefd);
+		  printf("\n%s\n",test_buffer);
 
 	if (filefd == NULL) {
             perror("open");
@@ -161,27 +161,14 @@ void  *send_some_files(void * socket){
 
 		}
 
-	//sending files o yeee
-	//see if the file exists
-	//devide it into packets and send :P
-	//printf("prodje sve sada pada segmentation fault\n");
-	/*filefd= fopen(buffer_test,"rb");
-	if (filefd == -1) {
-            perror("open");
-            exit(EXIT_FAILURE);
-        }
-
-	printf("we opened the file \n");
-	fseek(filefd, 0, SEEK_END);
-	file_size = ftell(filefd);
-	*/
 
 	printf("file size is %f mb\n",file_size/1000000);
 	double packets = (file_size/PACKET_SIZE+1);
 	int ipackets = (int)packets;
 	printf("number of packets %d\n",ipackets);
 	//int cpackets = htonl(packets);
-	snprintf(buffer, BUF_SIZE, "%d", ipackets);
+	//upisivanje velicinu file tj broj packeta i slanje serveru
+	/*snprintf(buffer, BUF_SIZE, "%d", ipackets);
 		ret=0;
 	printf("%s\n",buffer);
 	ret=send(sockfd,buffer,BUF_SIZE,0);
@@ -189,7 +176,7 @@ void  *send_some_files(void * socket){
 	if(ret<0){
 	 	printf("Error sending data!\n\t-%s", buffer);
 
-	}
+	}*/
 
 
 
@@ -199,7 +186,7 @@ void  *send_some_files(void * socket){
 
 	while(1){
 
-		printf("usli smo u nread while petlju\n");
+		//printf("usli smo u nread while petlju\n");
 	int nread =fread(buffer_file,1,PACKET_SIZE,filefd);
 
 	if(nread >0){
