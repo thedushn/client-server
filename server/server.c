@@ -2,20 +2,11 @@
 uspe da posalje file i da ga imenuje posle 2 pokusaja
 napravi file koji zelimo posalje
 problem puni podatke sa tekstom koji se ispisuje u konzoli a ne tekstom koji se nalazi u drugom file
-
-
 nece da se zakljuca chat2...
 ne pravi file
 treba ubaciti condtion variable a nece mamu mu  njegovu
-
-
-
 bio je ubacen cond var i radilo je samo sto je ispisivalo jos uvek conslose type shit
 sada ni to nece chat2 salje sve treba izbaciti nesto iz receiving da bi to radilo kako treba bufer2
-
-
-slanje paketa radi samo sto pokupi ime file i upise ga i skupi jos nekih praznih karatketera
-
 */
 #include"stdio.h"
 #include"stdlib.h"
@@ -26,10 +17,12 @@ slanje paketa radi samo sto pokupi ime file i upise ga i skupi jos nekih praznih
 #include"pthread.h"
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "functions.h"
 #define PORT 4445
 
 #define BUF_SIZE 2000
 #define CLADDR_LEN 100
+#define PACKET_SIZE 1400
 char * test="Type the name  of the file u want to receive\n";
 char *message= "Iste su extensions mozemo da nastavimo sa slanjem";
 int num_packets;
@@ -46,6 +39,8 @@ void *receiving(void *socket){
  	sockfd = (int) socket;
 	char buffer2[BUF_SIZE];
 	char buffer_file[BUF_SIZE];
+	char num_packets[BUF_SIZE];
+	memset(num_packets,0,BUF_SIZE);
 	memset(buffer_file,0,BUF_SIZE);
 	memset(buffer2,0,BUF_SIZE);
 	ssize_t dataReceived;
@@ -67,30 +62,65 @@ void *receiving(void *socket){
 		printf("Error sending data!\n\t-%s", buffer);
 		//printf("slanje broja paketa nije uspelo\n");
 		}
-
-	printf("sta salje client %s\n", buffer);
-	//sada u ovom receive treba da primi file kako treba da se zove
+	//	printf("sta salje client %s\n", buffer2);
+	printf("sta salje client %s\n", buffer);//ovde primi da su file iste extensions
+	//sada u ovom receive treba da primi file kako treba da sse zove
 	ret =recvfrom(sockfd,buffer2,BUF_SIZE,0,NULL,NULL);
 			if(ret<0){
 			printf("Error sending data!\n\t-%s", buffer2);
 			}
-			printf("sta salje client %s\n", buffer2);//ovde primi da su file iste extensions
-	//num_packets = atoi(buffer);
-	//printf("broj packeta %d \n",num_packets);
+			printf("sta salje client %s\n", buffer2);
+			//primanje broja paketa
+			ret =recvfrom(sockfd,num_packets,BUF_SIZE,0,NULL,NULL);
+					if(ret<0){
+					printf("Error sending data!\n\t-%s", num_packets);
+					}
+					printf("broj paketa : %s\n",num_packets);
+	int packets = atoi(num_packets);
+	printf("broj packeta %d \n",packets);
+	int count=0;
 	filefd = fopen(buffer,"w+");
-	printf("file opened %s",buffer);
+
 			if (filefd == -1) {
            	 		perror("open");
             			exit(EXIT_FAILURE);
         		}
-		while((dataReceived = read(sockfd,buffer_file,1024))	> 0){
-			//printf("data %s",buffer_file);
-			if(strcmp(buffer_file,end)==0){
+		//for(int i=0; i<packets;i++){
+
+			while((dataReceived = read(sockfd,buffer_file,PACKET_SIZE))>0){
+				printf("data %s",buffer_file);
+				for(int i=0; i<packets;i++){
+					printf("i: %d",i);
+				fwrite(buffer_file,1,dataReceived,filefd);
+
+				if(dataReceived < 0) {
+					 printf("\n Read Error \n");
+				}
+
+				printf("\nFile OK....Completed\n");
+
+				}
+				fclose(filefd);
+				printf("closed the file,exited the loop\n");
+				break;
+			}
+			//printf("i: %d",i);
+	//	}
+		printf("lets seee if this works\n");
+
+	/*	while((dataReceived = read(sockfd,buffer_file,PACKET_SIZE))	> 0){
+			printf("data %s",buffer_file);
+
+			if(strncmp(buffer_file,end,11)==0){
 				fclose(filefd);
 				printf("zatvorili smo file");
 				break;
 			}
+			for(count=0;count<=packets;count++){
+				printf("count: %d\n",count);
 			fwrite(buffer_file,1,dataReceived,filefd);
+			}
+			break;
 		}
 			if(dataReceived < 0)
     			{
@@ -98,9 +128,9 @@ void *receiving(void *socket){
     			}
 			printf("\nFile OK....Completed\n");
 	//}
-
+			fclose(filefd);
 	pthread_cond_signal(&cond);
-	printf("izasli smo iz receiving\n");
+	printf("izasli smo iz receiving\n");*/
 
 
 }

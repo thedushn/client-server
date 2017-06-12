@@ -166,9 +166,9 @@ void  *send_some_files(void * socket){
 	double packets = (file_size/PACKET_SIZE+1);
 	int ipackets = (int)packets;
 	printf("number of packets %d\n",ipackets);
-	//int cpackets = htonl(packets);
+	int cpackets = htonl(packets);
 	//upisivanje velicinu file tj broj packeta i slanje serveru
-	/*snprintf(buffer, BUF_SIZE, "%d", ipackets);
+	snprintf(buffer, BUF_SIZE, "%d", ipackets);
 		ret=0;
 	printf("%s\n",buffer);
 	ret=send(sockfd,buffer,BUF_SIZE,0);
@@ -176,13 +176,13 @@ void  *send_some_files(void * socket){
 	if(ret<0){
 	 	printf("Error sending data!\n\t-%s", buffer);
 
-	}*/
+	}
 
 
 
 
 
-
+	int count;
 
 	while(1){
 
@@ -192,7 +192,9 @@ void  *send_some_files(void * socket){
 	if(nread >0){
 
 	write(sockfd,buffer_file,nread);
-
+	//printf("%s",buffer_file);
+	printf("nread %d\n",nread);
+	count++;
 	}
 	if(nread < PACKET_SIZE){
 
@@ -216,6 +218,8 @@ void  *send_some_files(void * socket){
 
 	fclose(filefd);//6.6
 	printf("Closing file\n");
+	printf("%d",count);
+	sleep(3);
 	/*while(1){
 	read_return = read(filefd,buffer,BUF_SIZE);
 	if(read_return ==0)
