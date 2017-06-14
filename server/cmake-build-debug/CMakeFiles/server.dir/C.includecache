@@ -1,0 +1,66 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dushn/diplomski /clion/server/functions.c
+stdio.h
+/home/dushn/diplomski /clion/server/stdio.h
+stdlib.h
+/home/dushn/diplomski /clion/server/stdlib.h
+sys/types.h
+/home/dushn/diplomski /clion/server/sys/types.h
+sys/socket.h
+/home/dushn/diplomski /clion/server/sys/socket.h
+string.h
+/home/dushn/diplomski /clion/server/string.h
+netinet/in.h
+/home/dushn/diplomski /clion/server/netinet/in.h
+netdb.h
+/home/dushn/diplomski /clion/server/netdb.h
+pthread.h
+/home/dushn/diplomski /clion/server/pthread.h
+sys/stat.h
+-
+fcntl.h
+-
+math.h
+-
+functions.h
+/home/dushn/diplomski /clion/server/functions.h
+unistd.h
+-
+
+/home/dushn/diplomski /clion/server/functions.h
+
+/home/dushn/diplomski /clion/server/server.c
+stdio.h
+/home/dushn/diplomski /clion/server/stdio.h
+stdlib.h
+/home/dushn/diplomski /clion/server/stdlib.h
+sys/types.h
+/home/dushn/diplomski /clion/server/sys/types.h
+sys/socket.h
+/home/dushn/diplomski /clion/server/sys/socket.h
+string.h
+/home/dushn/diplomski /clion/server/string.h
+netinet/in.h
+/home/dushn/diplomski /clion/server/netinet/in.h
+pthread.h
+/home/dushn/diplomski /clion/server/pthread.h
+sys/stat.h
+-
+fcntl.h
+-
+functions.h
+/home/dushn/diplomski /clion/server/functions.h
+unistd.h
+-
+arpa/inet.h
+-
+functions.h
+/home/dushn/diplomski /clion/server/functions.h
+
